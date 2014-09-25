@@ -20,7 +20,7 @@ module Grnds
 
       def sign_out_url
         configuration = Grnds::Sso.configuration
-        configuration.base_site + configuration.sign_in_post_fix
+        configuration.base_site + configuration.sign_out_post_fix
       end
     end
   end
