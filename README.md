@@ -21,6 +21,5 @@ Grnds::Sso.configure do |config|
 end
 ```
 
-- edit config
 Add environment configurations.
--
+
