@@ -7,6 +7,8 @@ grnds-sso
 - copy the sample config(below) to your app at `config/initializers/grnds_sso.rb`
 
 ```
+Rails.application.config.action_dispatch.cookies_serializer = :marshal
+
 Grnds::Sso.configure do |config|
   case Rails.env
   when 'development', 'test'
