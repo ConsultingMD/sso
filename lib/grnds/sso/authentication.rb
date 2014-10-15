@@ -27,7 +27,7 @@ module Grnds
 
       def authenticated?
         session[:init] = true unless session.loaded?
-        current_user.present? and current_customer.present?
+        current_user.present?
       end
     end
   end
