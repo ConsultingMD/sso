@@ -21,7 +21,7 @@ module Grnds
       end
 
       def authenticate_user
-        set_development_credentials if %w[development test].include?(Rails.env)
+        set_development_credentials if %w[test].include?(Rails.env)
         redirect_to Grnds::Sso.sign_in_url unless authenticated?
       end
 
