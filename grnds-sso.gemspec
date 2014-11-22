@@ -5,7 +5,7 @@ require 'grnds/sso/version'
 Gem::Specification.new do |s|
   s.name        = 'grnds-sso'
   s.version     = Grnds::Sso::VERSION
-  s.date        = '2010-09-24'
+  s.date        = '2014-09-24'
   s.summary     = "SSO for Grand Rounds"
   s.description = "A simple way to expose SSO on Grand Rounds projects"
   s.authors     = ["Justin Ahn"]
