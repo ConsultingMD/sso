@@ -1,3 +1,7 @@
+0.0.3
+=====
+ - added VpnConstraint class for use in routes.rb to protect console URLs.
+
 0.0.2
 =====
  - changed sso_development vars to only set test data if no data previously existed.
