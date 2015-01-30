@@ -18,8 +18,8 @@ Grnds::Sso.configure do |config|
   else
     config.base_site = "https://www.#{Rails.env}.grandroundshealth.com"
   end
-  config.sign_in_post_fix = '/app/users/sign_in'
-  config.sign_out_post_fix = '/app/users/sign_out'
+  config.sign_in_post_fix = '/users/sign_in'
+  config.sign_out_post_fix = '/users/sign_out'
 end
 ```
 
@@ -28,9 +28,9 @@ end
   if Rails.env == 'test' or Rails.env == 'development'
     Frick::Application.config.session_store :cookie_store, key: "_GrandRounds_session_#{Rails.env}", :domain => :all
   elsif Rails.env == 'production'
-    Frick::Application.config.session_store :cookie_store, key: "_GrandRounds_session", :domain => ".#{ConsultingMD::Application.config.website_domain}"
+    Frick::Application.config.session_store :cookie_store, key: "_GrandRounds_session", :domain => ".#{Frick::Application.config.website_domain}"
   else
-    Frick::Application.config.session_store :cookie_store, key: "_GrandRounds_session_#{Rails.env}", :domain => ".#{ConsultingMD::Application.config.website_domain}"
+    Frick::Application.config.session_store :cookie_store, key: "_GrandRounds_session_#{Rails.env}", :domain => ".#{Frick::Application.config.website_domain}"
   end
 ```
 
