@@ -15,12 +15,8 @@ module Grnds::Sso
     def initialize
       self.require_login = (Rails.env != 'development')
 
-      case Rails.env
-      when 'development', 'test' then
-        self.pattern = LOCALHOST
-      else
-        self.pattern = VPN
-      end
+      # Our deployments use nginx in a way that hides the source IP address
+      self.pattern = LOCALHOST
     end
 
     def configure
