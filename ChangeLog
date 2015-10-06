@@ -1,3 +1,7 @@
+0.0.5
+====
+ - bypass VpnConstraint in development.
+
 0.0.3
 =====
  - added VpnConstraint class for use in routes.rb to protect console URLs.
