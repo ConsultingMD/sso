@@ -9,12 +9,9 @@ module Grnds::Sso
       delegate :configure, :matches?, to: :instance
     end
 
-    attr_accessor :require_login, :pattern
-    alias :require_login? :require_login
+    attr_accessor :pattern
 
     def initialize
-      self.require_login = (Rails.env != 'development')
-
       # Our deployments use nginx in a way that hides the source IP address
       self.pattern = LOCALHOST
     end
@@ -24,9 +21,14 @@ module Grnds::Sso
     end
 
     def matches?(request)
-      return false unless !require_login? || authenticated?(request)
+      return true if development?
+      return false unless authenticated?(request)
 
       return on_the_vpn?(request)
+    end
+
+    def development?
+      Rails.env.development?
     end
 
     def authenticated?(request)
