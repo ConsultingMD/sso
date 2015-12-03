@@ -5,6 +5,7 @@ module Grnds
       included do
         helper_method :current_user
         helper_method :current_customer
+        helper_method :current_institution
         helper_method :current_first_name
         helper_method :current_last_name
       end
@@ -14,6 +15,10 @@ module Grnds
 
       def current_customer
         session['customer_name']
+      end
+
+      def current_institution
+        session['institution_name']
       end
 
       def current_first_name

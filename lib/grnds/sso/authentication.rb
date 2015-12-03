@@ -18,6 +18,7 @@ module Grnds
         session['uid'] ||= '57'
         session['first_name'] ||= 'Kenneth'
         session['last_name'] ||= 'Berland'
+        session['institution_name'] ||= 'Hospital for Special Services'
       end
 
       def authenticate_user
