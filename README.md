@@ -7,19 +7,10 @@ grnds-sso
 - copy the sample config(below) to your app at `config/initializers/grnds_sso.rb` (check existing integrations for clearer or DRYer implementations):
 
 ```
-Rails.application.config.action_dispatch.cookies_serializer = :marshal
+Rails.application.config.action_dispatch.cookies_serializer = :json
 
 Grnds::Sso.configure do |config|
-  case Rails.env
-  when 'development', 'test'
-    config.base_site = 'http://localhost:10001'
-  when 'production'
-    config.base_site = 'https://www.grandroundshealth.com'
-  else
-    config.base_site = "https://www.#{Rails.env}.grandroundshealth.com"
-  end
-  config.sign_in_post_fix = '/users/sign_in'
-  config.sign_out_post_fix = '/users/sign_out'
+  config.base_site = Grnds::Service::Urls[:jarvis]
 end
 ```
 
