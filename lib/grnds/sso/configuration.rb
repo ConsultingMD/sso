@@ -11,6 +11,11 @@ module Grnds
     class Configuration
       attr_accessor :base_site, :sign_in_post_fix, :sign_out_post_fix
 
+      def initialize
+        @sign_in_post_fix = '/users/sign_in'
+        @sign_out_post_fix = '/users/sign_out'
+      end
+
       def vpn
         Grnds::Sso::VpnConstraint.instance
       end
