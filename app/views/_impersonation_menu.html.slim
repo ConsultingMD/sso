@@ -1,0 +1,3 @@
+= form_tag('', method: :GET) do
+  input name='case_id' type='hidden' value=kase.id
+  = select_tag :user_id, options_for_select(options_for_impersonate_user(kase)), prompt: 'Impersonate', class: 'impersonation'

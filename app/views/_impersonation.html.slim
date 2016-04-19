@@ -1,0 +1,14 @@
+- if impersonating?
+  / Use a jquery on-load hook so we don't need to have all of our library
+  / loaded in order to use this partial.  Assumes that every page that
+  / includes this partial includes jquery in their head. Do this in JS so we
+  / get access to Ruby I18n interpolation.
+  javascript:
+    $(function(){
+      var notice = "#{t('user.impersonation.notice', true_user: true_user.presentable_name, current_user: current_user.presentable_name)}";
+      var code = "#{current_user.last_coupon_code}";
+      var path = "#{stop_impersonation_path}";
+      var msg  = "#{notice}, #{code}, #{path}";
+
+      ConsultingMD.systemMessage(msg);
+    });
