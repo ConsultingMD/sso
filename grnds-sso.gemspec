@@ -11,5 +11,5 @@ Gem::Specification.new do |s|
   s.authors     = ["Justin Ahn", "Rick Cobb"]
   s.email       = 'justin@grandroundshealth.com'
   s.files       = `git ls-files`.split($/)
-  s.license     = 'MIT'
+  s.license     = 'MIT'    
 end

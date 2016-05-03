@@ -14,10 +14,12 @@ module Grnds
       protected
 
       def set_development_credentials
-        session['customer_name'] ||= 'Grand Rounds'
-        session['uid'] ||= '57'
-        session['first_name'] ||= 'Kenneth'
-        session['last_name'] ||= 'Berland'
+        Grnds::Sso::Session.set_credentials(user: {
+          customer_name: 'Grand Rounds',
+          uid:           '57',
+          first_name:    'Kenneth',
+          last_name:     'Berland'
+        })
       end
 
       def authenticate_user
