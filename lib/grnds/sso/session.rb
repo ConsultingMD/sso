@@ -1,17 +1,17 @@
 module Grnds
   module Sso
-    module Session
+    class Session
       extend ActiveSupport::Concern
 
       protected
 
       def self.base_fields
-        {
+        OpenStruct.new(
           customer_name: -> (user){ user.try(:customer_name) },
           uid:           -> (user){ user.try(:uid) },
           first_name:    -> (user){ user.try(:first_name) },
           last_name:     -> (user){ user.try(:last_name )}
-        }
+        )
       end
 
       def self.set_credentials(session: nil, user: current_user, extras: {})
