@@ -14,6 +14,7 @@ module Grnds
       protected
 
       def set_development_credentials
+        session['warden.user.user.key'] ||= [[2]]
         session['customer_name'] ||= 'Grand Rounds'
         session['uid'] ||= '57'
         session['first_name'] ||= 'Kenneth'
