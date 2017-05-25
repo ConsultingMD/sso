@@ -25,7 +25,7 @@ module Grnds
       def sign_in_url(query={})
         configuration = Grnds::Sso.configuration
         url = configuration.base_site + configuration.sign_in_post_fix
-        url += "?#{query.to_param}" if params.present?
+        url += "?#{query.to_param}" if query.present?
         url
       end
 
