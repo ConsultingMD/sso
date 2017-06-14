@@ -22,9 +22,11 @@ module Grnds
     end
 
     class << self
-      def sign_in_url
+      def sign_in_url(query={})
         configuration = Grnds::Sso.configuration
-        configuration.base_site + configuration.sign_in_post_fix
+        url = configuration.base_site + configuration.sign_in_post_fix
+        url += "?#{query.to_param}" if query.present?
+        url
       end
 
       def sign_out_url
