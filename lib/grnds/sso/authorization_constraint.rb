@@ -16,6 +16,7 @@ module Grnds::Sso
 
     def authorized?(request)
       session = request.session
+      return true if session['primary_role'] == 'admin'
       return session['primary_role'] == (self.role)
     end
 
