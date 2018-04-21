@@ -21,14 +21,7 @@ module Grnds::Sso
     end
 
     def matches?(request)
-      return true if development?
-      return false unless authenticated?(request)
-
-      return on_the_vpn?(request)
-    end
-
-    def development?
-      Rails.env.development?
+      authenticated?(request) && on_the_vpn?(request)
     end
 
     def authenticated?(request)
@@ -39,6 +32,10 @@ module Grnds::Sso
     end
 
     def on_the_vpn?(request)
+      # pancakes runs in development env
+      # this check works when running 127.0.0.1, not in pancakes
+      return true if Rails.env.development?
+
       case pattern
       when String
         return pattern == request.remote_ip
