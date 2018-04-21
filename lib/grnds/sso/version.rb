@@ -1,5 +1,5 @@
 module Grnds
   module Sso
-    VERSION = '0.0.5'
+    VERSION = '1.0'
   end
 end
