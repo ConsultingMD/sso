@@ -32,10 +32,6 @@ module Grnds::Sso
     end
 
     def on_the_vpn?(request)
-      # pancakes runs in development env
-      # this check works when running 127.0.0.1, not in pancakes
-      return true if Rails.env.development?
-
       case pattern
       when String
         return pattern == request.remote_ip
