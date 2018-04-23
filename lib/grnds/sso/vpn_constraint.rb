@@ -21,14 +21,7 @@ module Grnds::Sso
     end
 
     def matches?(request)
-      return true if development?
-      return false unless authenticated?(request)
-
-      return on_the_vpn?(request)
-    end
-
-    def development?
-      Rails.env.development?
+      authenticated?(request) && on_the_vpn?(request)
     end
 
     def authenticated?(request)
