@@ -32,6 +32,9 @@ module Grnds::Sso
     end
 
     def on_the_vpn?(request)
+      # for pancakes
+      return true if ENV['PANCAKES_STACK_ID']
+
       case pattern
       when String
         return pattern == request.remote_ip
