@@ -1,10 +1,9 @@
 module Grnds::Sso
   class AuthorizationConstraint
+    attr_accessor :roles
 
-    attr_accessor :role
-
-    def initialize(role)
-      self.role = role
+    def initialize(roles)
+      self.roles = roles
     end
 
     def authenticated?(request)
@@ -17,7 +16,7 @@ module Grnds::Sso
     def authorized?(request)
       session = request.session
       return true if session['primary_role'] == 'admin'
-      return session['primary_role'] == (self.role)
+      return roles.include?(session['primary_role'])
     end
 
     def matches?(request)
