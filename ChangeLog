@@ -1,3 +1,7 @@
+1.2
+===
+ - introduce Authorization module
+
 0.0.5
 ====
  - bypass VpnConstraint in development.
