@@ -1,9 +1,9 @@
 module Grnds::Sso
   class AuthorizationConstraint
-    attr_accessor :roles
+    attr_reader :roles
 
     def initialize(roles)
-      self.roles = roles
+      @roles = roles
     end
 
     def authenticated?(request)
