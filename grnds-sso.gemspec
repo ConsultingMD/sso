@@ -16,4 +16,6 @@ Gem::Specification.new do |s|
   test_files    = `git ls-files -- {spec,features}/*`.split("\n")
   s.files       = all_files - test_files
   s.test_files  = test_files
+
+  s.add_development_dependency 'rspec_junit_formatter', '0.4.1'
 end
