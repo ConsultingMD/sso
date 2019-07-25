@@ -17,7 +17,7 @@ module Grnds::Sso
     end
 
     def matches?(request)
-      return authenticated?(request) && authorized?(request)
+      authenticated?(request) && authorized?(request)
     end
   end
 end
