@@ -17,5 +17,7 @@ Gem::Specification.new do |s|
   s.files       = all_files - test_files
   s.test_files  = test_files
 
+  s.add_dependency 'activesupport'
   s.add_development_dependency 'rspec_junit_formatter', '0.4.1'
+  s.add_development_dependency 'sorbet', '0.4.4507'
 end

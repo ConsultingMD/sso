@@ -1,3 +1,4 @@
+# typed: true
 module Grnds::Sso
   class VpnConstraint
     include Singleton

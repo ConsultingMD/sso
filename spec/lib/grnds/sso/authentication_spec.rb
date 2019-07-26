@@ -1,3 +1,4 @@
+# typed: false
 describe Grnds::Sso::Authentication do
   subject do
     Class.new do

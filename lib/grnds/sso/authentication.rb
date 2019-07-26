@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+# typed: false
+
 module Grnds
   module Sso
     module Authentication
@@ -35,6 +39,7 @@ module Grnds
   end
 end
 
+require 'action_controller'
 ActionController::Base.class_eval do
   extend Grnds::Sso::Authentication::ClassMethods
 end

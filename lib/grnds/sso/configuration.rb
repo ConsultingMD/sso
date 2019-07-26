@@ -1,3 +1,4 @@
+# typed: true
 module Grnds
   module Sso
     def self.configure

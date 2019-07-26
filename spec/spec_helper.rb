@@ -1,3 +1,4 @@
+# typed: strict
 require 'bundler'
 
 # ensure rails is loaded first or the gem wont load all files required for testing

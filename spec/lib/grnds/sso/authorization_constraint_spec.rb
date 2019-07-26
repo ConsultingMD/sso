@@ -1,3 +1,4 @@
+# typed: false
 describe Grnds::Sso::AuthorizationConstraint do
   subject { described_class.new(%w(admin cc)) }
 

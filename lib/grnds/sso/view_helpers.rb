@@ -1,3 +1,4 @@
+# typed: false
 module Grnds
   module Sso
     module ViewHelpers
