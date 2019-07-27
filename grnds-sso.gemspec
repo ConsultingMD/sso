@@ -18,6 +18,8 @@ Gem::Specification.new do |s|
   s.test_files  = test_files
 
   s.add_dependency 'activesupport'
+  s.add_dependency 'sorbet-runtime', '0.4.4507'
   s.add_development_dependency 'rspec_junit_formatter', '0.4.1'
   s.add_development_dependency 'sorbet', '0.4.4507'
+  s.add_development_dependency 'pry'
 end

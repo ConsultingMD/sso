@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+$0 = 'pry'
+
+require 'pry'
+require_relative '../lib/grnds/sso'
+
+# Process command line options and run Pry
+opts = Pry::CLI.parse_options
+Pry::CLI.start(opts)
