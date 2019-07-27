@@ -1,38 +1,25 @@
-# typed: true
+# frozen_string_literal: true
+
+# typed: strong
+
 module Grnds
   module Sso
-    def self.configure
-      yield configuration
-    end
-
-    def self.configuration
-      @configuration ||= Grnds::Sso::Configuration.new
-    end
-
     class Configuration
+      extend T::Sig
+
+      sig { returns String }
       attr_accessor :base_site, :sign_in_post_fix, :sign_out_post_fix
 
+      sig { void }
       def initialize
-        @sign_in_post_fix = '/users/sign_in'
-        @sign_out_post_fix = '/users/sign_out'
+        @base_site = T.let('', String)
+        @sign_in_post_fix = T.let('/users/sign_in', String)
+        @sign_out_post_fix = T.let('/users/sign_out', String)
       end
 
+      sig { returns(Grnds::Sso::VpnConstraint) }
       def vpn
         Grnds::Sso::VpnConstraint.instance
-      end
-    end
-
-    class << self
-      def sign_in_url(query={})
-        configuration = Grnds::Sso.configuration
-        url = configuration.base_site + configuration.sign_in_post_fix
-        url += "?#{query.to_param}" if query.present?
-        url
-      end
-
-      def sign_out_url
-        configuration = Grnds::Sso.configuration
-        configuration.base_site + configuration.sign_out_post_fix
       end
     end
   end
