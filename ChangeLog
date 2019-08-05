@@ -1,3 +1,7 @@
+1.3
+===
+ - Unmark authorized_for? as a view helper method
+
 1.2
 ===
  - introduce Authorization module
