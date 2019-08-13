@@ -18,4 +18,5 @@ Gem::Specification.new do |s|
   s.test_files  = test_files
 
   s.add_development_dependency 'rspec_junit_formatter', '0.4.1'
+  s.add_dependency 'grnds-auth0'
 end
