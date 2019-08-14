@@ -17,7 +17,7 @@ describe Grnds::Sso::Jwt::Uid do
     allow(Grnds::Auth0::Token).to receive(:new).and_return(token)
   end
 
-  describe '#call' do
+  describe '.call' do
     it { expect(subject.call(request)).to be_nil }
 
     context 'with a jwt in the request header' do
