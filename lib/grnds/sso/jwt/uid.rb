@@ -5,7 +5,7 @@ module Grnds
       COOKIE = 'user_auth0_token'.freeze
       UID_CLAIM = :'https://grandrounds.com/email'.freeze
 
-      class Uid
+      module Uid
         class << self
           def call(request)
             request_token = token_from(request)

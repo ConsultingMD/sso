@@ -1,8 +1,4 @@
 describe Grnds::Sso::Jwt::Uid do
-  subject do
-    Grnds::Sso::Jwt::Uid
-  end
-
   let(:uid) { 'foobar@a.ca' }
   let(:dummy_jwt) { 'Bearer JWT' }
   let(:jwt_headers) { Hash[Grnds::Sso::Jwt::HEADER, dummy_jwt] }
