@@ -51,5 +51,27 @@ describe Grnds::Sso::Authentication do
         expect(subject).not_to have_received(:redirect_to)
       end
     end
+
+    context 'with a JWT present' do
+      let(:jwt_uid) { 'foobar@a.ca' }
+
+      before do
+        allow(Grnds::Sso::Jwt::Uid).to receive(:call).and_return(jwt_uid)
+      end
+
+      it 'doesnt redirect' do
+        subject.authenticate_user
+        expect(subject).not_to have_received(:redirect_to)
+      end
+
+      context 'when previously authenticated' do
+        let(:session) {{ 'uid'=> 1 }}
+
+        it 'JWT take precedence' do
+          subject.authenticate_user
+          expect(subject.session['uid']).to eq jwt_uid
+        end
+      end
+    end
   end
 end
