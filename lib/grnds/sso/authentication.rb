@@ -24,8 +24,8 @@ module Grnds
 
       def authenticate_user
         set_development_credentials if %w[test].include?(Rails.env)
-        jwt_uid = Jwt::Uid.call(request)
-        session['uid'] = jwt_uid if jwt_uid.present?
+        jwt_subject = Jwt::Subject.call(request)
+        session['uid'] = jwt_subject.id if jwt_subject.present?
         redirect_to Grnds::Sso.sign_in_url(return_to: request.url) unless authenticated?
       end
 

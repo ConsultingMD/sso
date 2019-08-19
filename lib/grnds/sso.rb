@@ -5,4 +5,4 @@ require 'grnds/sso/authentication' if defined?(Rails)
 require 'grnds/sso/authorization' if defined?(Rails)
 require 'grnds/sso/vpn_constraint' if defined?(Rails)
 require 'grnds/sso/authorization_constraint' if defined?(Rails)
-require 'grnds/sso/jwt/uid'
+require 'grnds/sso/jwt/subject'
