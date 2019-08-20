@@ -5,11 +5,11 @@ module Grnds
       COOKIE = 'user_auth0_token'.freeze
 
       module Subject
-        GRANT_TYPE_CLAIM = :'gty'.freeze
-        UID_CLAIM = :'https://grandrounds.com/claims/uid'.freeze
+        SUBJECT_CLAIM = :sub
+        UID_CLAIM = :'https://grandrounds.com/claims/uid'
         TYPES = {
-          'password': :user,
-          'client-credentials': :application
+          application: Regexp.new('@clients$'),
+          user: Regexp.new('^auth0\|')
         }.freeze
 
         Value = Struct.new(:type, :id) do
@@ -38,7 +38,8 @@ module Grnds
           end
 
           def parse(token)
-            type = TYPES[token.payload[GRANT_TYPE_CLAIM].to_sym]
+            subject = token.payload[SUBJECT_CLAIM]
+            type, _ = TYPES.find{ |_, regex| regex.match? subject }
             id = token.payload[UID_CLAIM]
 
             [type, id]

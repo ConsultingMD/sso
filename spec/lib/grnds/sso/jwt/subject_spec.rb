@@ -1,5 +1,5 @@
 describe Grnds::Sso::Jwt::Subject do
-  let(:grant_type) { 'client-credentials' }
+  let(:sub) { '123456@clients' }
   let(:uid) { 'foobar@a.ca' }
   let(:dummy_jwt) { 'Bearer JWT' }
   let(:jwt_headers) { Hash[Grnds::Sso::Jwt::HEADER, dummy_jwt] }
@@ -7,7 +7,7 @@ describe Grnds::Sso::Jwt::Subject do
   let(:jwt_payload) do
     value = {}
     value[Grnds::Sso::Jwt::Subject::UID_CLAIM] = uid
-    value[Grnds::Sso::Jwt::Subject::GRANT_TYPE_CLAIM] = grant_type
+    value[Grnds::Sso::Jwt::Subject::SUBJECT_CLAIM] = sub
     value
   end
 
@@ -32,19 +32,21 @@ describe Grnds::Sso::Jwt::Subject do
     it { expect(subject.call(request).id ).to eq(uid) }
 
     context 'without a uid claim' do
-      let(:jwt_payload) { Hash[Grnds::Sso::Jwt::Subject::GRANT_TYPE_CLAIM, grant_type] }
+      let(:jwt_payload) { Hash[Grnds::Sso::Jwt::Subject::SUBJECT_CLAIM, sub] }
 
       it { expect(subject.call(request)).to be_nil }
     end
 
-    context 'as a client-credential grant' do
+    context 'with a client formated subject claim' do
+      let(:sub) { '123456@clients' }
+
       it 'identifies the subject as an application' do
         expect(subject.call(request).type).to eq(:application)
       end
     end
 
-    context 'as a password grant' do
-      let(:grant_type) { 'password' }
+    context 'with a user formated subject claim' do
+      let(:sub) { 'auth0|123456' }
 
       it 'identifies the subject as a user' do
         expect(subject.call(request).type).to eq(:user)
@@ -70,6 +72,5 @@ describe Grnds::Sso::Jwt::Subject do
 
       it_behaves_like 'it resolved a jwt'
     end
-
   end
 end
