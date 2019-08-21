@@ -3,9 +3,14 @@ module Grnds
     module Jwt
       HEADER = 'Authorization'.freeze
       COOKIE = 'user_auth0_token'.freeze
-      UID_CLAIM = :'https://grandrounds.com/email'.freeze
 
-      module Uid
+      module Subject
+        Value = Struct.new(:type, :id) do
+          def valid?
+            values.all? &:present?
+          end
+        end
+
         class << self
           def call(request)
             request_token = token_from(request)
@@ -13,16 +18,16 @@ module Grnds
 
             token = Grnds::Auth0::Token.new(request_token)
             token.verify!
-            uid_from(token)
+
+            result = Value.new(token.type, token.uid).freeze
+            result if result.valid?
           end
 
-          private def token_from(request)
+          private
+
+          def token_from(request)
             request.headers[HEADER].presence ||
-            request.cookies[COOKIE].presence
-          end
-
-          private def uid_from(token)
-            token.payload[UID_CLAIM]
+              request.cookies[COOKIE].presence
           end
         end
       end

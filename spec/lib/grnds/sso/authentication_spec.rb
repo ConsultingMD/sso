@@ -53,10 +53,12 @@ describe Grnds::Sso::Authentication do
     end
 
     context 'with a JWT present' do
-      let(:jwt_uid) { 'foobar@a.ca' }
+      let(:jwt_user) {
+        Grnds::Sso::Jwt::Subject::Value.new(:user, 'foobar@a.ca')
+      }
 
       before do
-        allow(Grnds::Sso::Jwt::Uid).to receive(:call).and_return(jwt_uid)
+        allow(Grnds::Sso::Jwt::Subject).to receive(:call).and_return(jwt_user)
       end
 
       it 'doesnt redirect' do
@@ -69,7 +71,7 @@ describe Grnds::Sso::Authentication do
 
         it 'JWT take precedence' do
           subject.authenticate_user
-          expect(subject.session['uid']).to eq jwt_uid
+          expect(subject.session['uid']).to eq jwt_user.id
         end
       end
     end
