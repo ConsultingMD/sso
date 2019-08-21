@@ -60,14 +60,6 @@ describe Grnds::Sso::Jwt::Subject do
         expect(result.id).to eq(uid)
       end
     end
-
-    context 'without required subject claims' do
-      let(:token_type) { }
-      let(:uid) { 67890 }
-      let(:result) {
-        subject.call(request)
-      }
-    end
   end
 
   describe '.call' do
