@@ -1,56 +1,72 @@
 describe Grnds::Sso::Jwt::Subject do
-  let(:sub) { '123456@clients' }
-  let(:uid) { 'foobar@a.ca' }
   let(:dummy_jwt) { 'Bearer JWT' }
   let(:jwt_headers) { Hash[Grnds::Sso::Jwt::HEADER, dummy_jwt] }
   let(:jwt_cookies) { Hash[Grnds::Sso::Jwt::COOKIE, dummy_jwt] }
-  let(:jwt_payload) do
-    value = {}
-    value[Grnds::Sso::Jwt::Subject::UID_CLAIM] = uid
-    value[Grnds::Sso::Jwt::Subject::SUBJECT_CLAIM] = sub
-    value
-  end
 
   let :request do
     double(headers: {}, cookies: {})
   end
 
-  let :token do
-    instance_double(Grnds::Auth0::Token, verify!: true, payload: jwt_payload)
-  end
-
-  before do
-    allow(Grnds::Auth0::Token).to receive(:new).and_return(token)
-  end
-
   shared_examples 'it resolved a jwt' do
+    let(:token_type) { }
+    let(:uid) { }
+    let :token do
+      instance_double(Grnds::Auth0::Token, verify!: true, type: token_type, uid: uid)
+    end
+
+    before do
+      allow(Grnds::Auth0::Token).to receive(:new).and_return(token)
+    end
+
     it 'verifies the token' do
       subject.call(request);
       expect(token).to have_received(:verify!)
     end
 
-    it { expect(subject.call(request).id ).to eq(uid) }
-
-    context 'without a uid claim' do
-      let(:jwt_payload) { Hash[Grnds::Sso::Jwt::Subject::SUBJECT_CLAIM, sub] }
-
-      it { expect(subject.call(request)).to be_nil }
+    it 'does not resolve a subject' do
+      expect(subject.call(request)).to be_nil
     end
 
-    context 'with a client formated subject claim' do
-      let(:sub) { '123456@clients' }
+    context 'with application token data' do
+      let(:token_type) { :application }
+      let(:uid) { 12345 }
+      let(:result) {
+        subject.call(request)
+      }
 
-      it 'identifies the subject as an application' do
-        expect(subject.call(request).type).to eq(:application)
+      it 'returns a value object' do
+        expect(result).to be_a Grnds::Sso::Jwt::Subject::Value
+      end
+
+      it 'correctly identifies the subject' do
+        expect(result.type).to eq(token_type)
+        expect(result.id).to eq(uid)
       end
     end
 
-    context 'with a user formated subject claim' do
-      let(:sub) { 'auth0|123456' }
+    context 'with a user token data' do
+      let(:token_type) { :user }
+      let(:uid) { 67890 }
+      let(:result) {
+        subject.call(request)
+      }
 
-      it 'identifies the subject as a user' do
-        expect(subject.call(request).type).to eq(:user)
+      it 'returns a value object' do
+        expect(result).to be_a Grnds::Sso::Jwt::Subject::Value
       end
+
+      it 'correctly identifies the subject' do
+        expect(result.type).to eq(token_type)
+        expect(result.id).to eq(uid)
+      end
+    end
+
+    context 'without required subject claims' do
+      let(:token_type) { }
+      let(:uid) { 67890 }
+      let(:result) {
+        subject.call(request)
+      }
     end
   end
 
