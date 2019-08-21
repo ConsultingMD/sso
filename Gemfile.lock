@@ -1,9 +1,9 @@
 GIT
   remote: git@github.com:ConsultingMD/auth0.git
-  revision: 0255a0a2fe1b194471e1a210376374e0de901f34
+  revision: d853b0695e93117d8ea8f52c4ce82ccdc715be22
   branch: master
   specs:
-    grnds-auth0 (1.0.0)
+    grnds-auth0 (1.1.0)
       typhoeus (>= 1.3.1)
 
 PATH
