@@ -7,7 +7,7 @@ module Grnds
         def grnds_sso_access(options = {})
           include Grnds::Sso::Authentication
           include Grnds::Sso::ViewHelpers
-          before_filter :authenticate_user, options
+          before_action :authenticate_user, options
         end
       end
 
