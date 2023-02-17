@@ -10,7 +10,7 @@ GIT
 PATH
   remote: .
   specs:
-    grnds-sso (2.4.0)
+    grnds-sso (2.4.1)
       grnds-auth0
 
 GEM
