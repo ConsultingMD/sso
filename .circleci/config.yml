@@ -2,7 +2,7 @@
 
 version: 2.1
 
- workflows:
+workflows:
   build:
     jobs:
       - build
