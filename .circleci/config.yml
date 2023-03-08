@@ -11,12 +11,12 @@ workflows:
             - build
           context:
             - dod-pypi
-          filters:
-            # only publish gem after cutting tag
-            tags:
-              only: /.*/
-            branches:
-              ignore: /.*/
+          # filters:
+          #   # only publish gem after cutting tag
+          #   tags:
+          #     only: /.*/
+          #   branches:
+          #     ignore: /.*/
 
 jobs:
   build:
