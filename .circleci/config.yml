@@ -7,7 +7,7 @@ workflows:
     jobs:
       - build:
           context:
-            - dod-pipy
+            - dod-pypi
       - publish:
           requires:
             - build
