@@ -1,5 +1,9 @@
 # grnds-sso
 
+## VPN
+
+A VPN connection is required because you need access to dependencies from the private gem index.
+
 ## Adding SSO to your application
 
 - copy the sample config(below) to your app at `config/initializers/grnds_sso.rb`
