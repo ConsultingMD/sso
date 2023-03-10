@@ -6,13 +6,16 @@ workflows:
   build:
     jobs:
       - build:
+          filters:
+            tags:
+              only: /.*/
           context:
-            - dod-pypi
+            - gemfury
       - publish:
           requires:
             - build
           context:
-            - dod-pypi
+            - gemfury
           filters:
             # only publish gem after cutting tag
             tags:
@@ -39,8 +42,6 @@ jobs:
       - run:
           name: install dependencies
           command: |
-            export BUNDLE_GEM__FURY__IO="$GEMFURY_DEPLOY_TOKEN"
-            export BUNDLE_MIRROR__GEMS__INCLUDEDHEALTH__COM=https://gem.fury.io/doctorondemand/
             gem install bundler -v 2.3.26 && bundle install --jobs=4 --retry=3 --path vendor/bundle
 
       - save_cache:
