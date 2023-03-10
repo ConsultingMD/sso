@@ -6,11 +6,11 @@ workflows:
   build:
     jobs:
       - build:
+          context:
+            - gemfury
           filters:
             tags:
               only: /.*/
-          context:
-            - gemfury
       - publish:
           requires:
             - build
@@ -22,6 +22,7 @@ workflows:
               only: /.*/
             branches:
               ignore: /.*/
+
 
 jobs:
   build:
