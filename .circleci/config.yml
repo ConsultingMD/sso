@@ -5,18 +5,22 @@ version: 2.1
 workflows:
   build:
     jobs:
-      - build
+      - build:
+          filters:
+            tags:
+              only: /.*/
       - publish:
           requires:
             - build
           context:
-            - dod-pypi
+            - gemfury
           filters:
             # only publish gem after cutting tag
             tags:
               only: /.*/
             branches:
               ignore: /.*/
+
 
 jobs:
   build:
