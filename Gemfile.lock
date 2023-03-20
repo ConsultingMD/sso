@@ -6,7 +6,7 @@ PATH
 
 GEM
   remote: https://rubygems.org/
-  remote: https://gems.includedhealth.com/doctorondemand/
+  remote: https://gem.fury.io/doctorondemand/
   specs:
     actioncable (5.2.0)
       actionpack (= 5.2.0)
